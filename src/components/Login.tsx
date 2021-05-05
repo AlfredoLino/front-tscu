@@ -9,6 +9,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import "../styles/Login.css"
 import { reducerLog } from '../dispatchers/Log.reducer';
+import {useMainContext} from "../Hooks.custom/MainProvider"
 
 
 
@@ -29,6 +30,8 @@ const useStyles = makeStyles({
 const Login : React.FC<logProps> = (props) : JSX.Element => {
 
     
+    const { dispatch : MainContexDispatch, state : MainContextState } = useMainContext()
+
     const classes = useStyles()
     const [open , setOpen] = React.useState<boolean>(false);
 
@@ -66,8 +69,12 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
                 })
             })
             const res = await req.json()
+            console.log(res)
             if(res.ok){
-
+                MainContexDispatch({action : "setToken", token : res.token})
+                console.log(MainContextState)
+            }else{
+                setOpen(true)
             }
         } catch (error) {
             
@@ -101,7 +108,7 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
                 </div>
             </div>
             <Snackbar open = {open} autoHideDuration = {6000} onClose = {handlerWarning}>
-                <MuiAlert onClose = {handlerWarning} variant = "filled" severity = "error" color = "error" elevation = {6} > ERROR: El correo ya ha sido registrado previamente en nuestra página. </MuiAlert>
+                <MuiAlert onClose = {handlerWarning} variant = "filled" severity = "error" color = "error" elevation = {6} > ERROR AL INICIAR SESION EN LA PAGINA </MuiAlert>
                     
             </Snackbar>
         </>

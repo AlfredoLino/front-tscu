@@ -3,16 +3,18 @@ import {MainReducer, MainContextState, MainContextPayload} from "../dispatchers/
 
 
 interface MainContextReducer {
-    state ?: MainContextState,
-    dispatch ?: React.Dispatch<MainContextPayload>
+    state : MainContextState,
+    dispatch : React.Dispatch<MainContextPayload>
 }
 
-const MainContext : React.Context<MainContextReducer> = React.createContext<MainContextReducer>({}) 
 
 
+let MainContext : React.Context<MainContextReducer>;
 
 const MainProvider : React.FC = ({children}) : JSX.Element => {
     const [state, dispatch] = useReducer(MainReducer, {})
+
+    MainContext = React.createContext<MainContextReducer>({state, dispatch}) 
     return (
         <MainContext.Provider value = {{state, dispatch}}>
             {children}
@@ -22,5 +24,5 @@ const MainProvider : React.FC = ({children}) : JSX.Element => {
 
 export default MainProvider;
 export function useMainContext() {
-    return useContext(MainContext)  
+    return useContext<MainContextReducer>(MainContext)  
 } 
