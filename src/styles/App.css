@@ -1,0 +1,7 @@
+@import url("./vars.css");
+
+body{
+    padding: 0;
+    background: rgb(2,71,94);
+    background: linear-gradient(90deg, rgba(2,71,94,1) 0%, rgba(104,121,128,1) 33%, rgba(243,189,161,1) 66%, rgba(254,254,204,1) 99%);
+}
