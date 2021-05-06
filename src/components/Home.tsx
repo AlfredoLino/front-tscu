@@ -6,7 +6,7 @@ const Home = () => {
 
     const mainProvider = useMainContext()
     useEffect( () => {
-        console.log(mainProvider.state)
+        console.log(mainProvider.state.token)
     } )
     const options = {
         scales: {
@@ -44,6 +44,7 @@ const Home = () => {
 
     return (
         <Layout>
+            {mainProvider.state.token && <h1>{mainProvider.state.token}</h1>}
             <h1>Homepage</h1>
             <p>Alfredo Lino Mendoza</p>
             <div className="plot">

@@ -10,6 +10,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import "../styles/Login.css"
 import { reducerLog } from '../dispatchers/Log.reducer';
 import {useMainContext} from "../Hooks.custom/MainProvider"
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles({
 
 const Login : React.FC<logProps> = (props) : JSX.Element => {
 
+    const history = useHistory()
     
     const { dispatch : MainContexDispatch, state : MainContextState } = useMainContext()
 
@@ -71,8 +73,10 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
             const res = await req.json()
             console.log(res)
             if(res.ok){
-                MainContexDispatch({action : "setToken", token : res.token})
-                console.log(MainContextState)
+                
+                localStorage.setItem("token", res.token)
+                history.push("/")
+
             }else{
                 setOpen(true)
             }
@@ -85,8 +89,22 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
         setOpen(!open)
     }
 
+    React.useEffect( () => {
+
+
+
+        console.log(MainContextState )
+    }, [])
+
     return (
         <>
+        
+        {/** Redireccion a la pagina principal si el token ya está en el LocalStorage */}
+
+        {localStorage.getItem("token") && history.push("/") }
+
+        {/* JSX */}
+
         <Navbar variant = {props.regVariant} />
             <div className = "login-card">
                 <div className = "lc-body">
