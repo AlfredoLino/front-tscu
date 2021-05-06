@@ -9,6 +9,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {makeStyles} from "@material-ui/core/styles"
 import {reducerSign} from "../dispatchers/LogSign.dispatcher"
+import { useHistory } from 'react-router-dom';
 import "../styles/Signin.css"
 const useStyles = makeStyles({
     txtfield: {
@@ -30,7 +31,7 @@ interface logProps {
 
 const Signin : React.FC<logProps> = (props) : JSX.Element => {
     const classes = useStyles()
-
+    const history = useHistory()
     const [state, dispatch] = useReducer(reducerSign, {
         email: "",
         password: "",
@@ -100,6 +101,11 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
 
     return (
         <>
+        {/** Redireccion a la pagina principal si el token ya está en el LocalStorage */}
+
+        {localStorage.getItem("token") && history.push("/") }
+
+        {/* JSX */}
         <Navbar variant = {props.regVariant} />
             <div className = "sign-card">
                 <div className = "lc-body">
