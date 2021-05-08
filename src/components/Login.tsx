@@ -31,8 +31,6 @@ const useStyles = makeStyles({
 const Login : React.FC<logProps> = (props) : JSX.Element => {
 
     const history = useHistory()
-    
-    const { dispatch : MainContexDispatch, state : MainContextState } = useMainContext()
 
     const classes = useStyles()
     const [open , setOpen] = React.useState<boolean>(false);
@@ -88,14 +86,6 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
     const handlerWarning = () => {
         setOpen(!open)
     }
-
-    React.useEffect( () => {
-
-
-
-        console.log(MainContextState )
-    }, [])
-
     return (
         <>
         
