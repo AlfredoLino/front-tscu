@@ -44,7 +44,6 @@ const Home = () => {
 
     return (
         <Layout>
-            {mainProvider.state.token && <h1>{mainProvider.state.token}</h1>}
             <h1>Homepage</h1>
             <p>Alfredo Lino Mendoza</p>
             <div className="plot">

@@ -22,6 +22,9 @@ const theme = createMuiTheme({
       },
       warning: {
         main: "#f3bda1"
+      },
+      success: {
+        main: "#02475e"
       }
   }
 })

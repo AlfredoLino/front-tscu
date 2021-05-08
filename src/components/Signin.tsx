@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import {Link} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles"
 import {reducerSign} from "../dispatchers/LogSign.dispatcher"
 import { useHistory } from 'react-router-dom';
@@ -38,7 +39,8 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
         passwordConf: ""
 
     })
-
+    const [openError, setOpenError] = React.useState(false);
+    const [openSuccess, setOpenSuccess] = React.useState(true);
     const onSubmit = async (e : any) => {
         e.preventDefault()
         try {
@@ -55,11 +57,10 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
             })
             const data = await req.json()
             if(data.ok){
-                console.log("here")
-                console.log(data)
+                setOpenSuccess(true);
             }else{
                 console.log("OPenSnack")
-                setOpen(true)
+                setOpenError(true)
                 
             }
         } catch (error) {
@@ -93,10 +94,13 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
 
     const formIsOk = () : boolean => !(state.password.length >= 8 &&  (state.email.includes("@")) && state.password === state.passwordConf)
 
-    const [open, setOpen] = React.useState(false);
+    
 
     const handlerWarning = () => {
-        setOpen(!open)
+        setOpenError(!openError)
+    }
+    const handlerSuccess = () => {
+        setOpenSuccess(!openSuccess)
     }
 
     return (
@@ -137,8 +141,12 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                     </form>
                     
                 </div>
-                <Snackbar open = {open} autoHideDuration = {6000} onClose = {handlerWarning}>
+                <Snackbar open = {openError} autoHideDuration = {6000} onClose = {handlerWarning}>
                     <MuiAlert onClose = {handlerWarning} variant = "filled" severity = "error" color = "error" elevation = {6} > ERROR: El correo ya ha sido registrado previamente en nuestra página. </MuiAlert>
+                    
+                </Snackbar>
+                <Snackbar open = {openSuccess} autoHideDuration = {6000} onClose = {handlerSuccess}>
+                    <MuiAlert onClose = {handlerSuccess} variant = "filled" severity = "success" color = "success" elevation = {6} > Registro con exito. Ahora puede <Link style = {{color: "#f3bda1"}} to = "/login">iniciar sesion</Link>.</MuiAlert>
                     
                 </Snackbar>
             </div>
