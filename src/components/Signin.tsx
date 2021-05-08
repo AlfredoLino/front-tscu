@@ -6,6 +6,7 @@ import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpwardRounded';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import WarningBar from "./Bars/Warning.bar"
+import SuccessBar from "./Bars/Success.bar"
 import {Link} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles"
 import {reducerSign} from "../dispatchers/LogSign.dispatcher"
@@ -39,7 +40,7 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
 
     })
     const [openError, setOpenError] = React.useState(false);
-    const [openSuccess, setOpenSuccess] = React.useState(false);
+    const [openSuccess, setOpenSuccess] = React.useState(true);
     const onSubmit = async (e : any) => {
         e.preventDefault()
         try {
@@ -140,8 +141,9 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                     </form>
                     
                 </div>
+                {/* SnackBars */}
                 <WarningBar errorState = {openError} handler = {handlerWarning} > ERROR: El correo ya ha sido registrado previamente en nuestra página. </WarningBar>
-                
+                <SuccessBar successState = {openSuccess} handler = {handlerSuccess} >Registro con exito. Ahora puede <Link style = {{color: "#f3bda1"}} to = "/login">iniciar sesion </Link>.</SuccessBar>
             </div>
         </>
     );
