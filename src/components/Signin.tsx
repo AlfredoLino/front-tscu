@@ -5,8 +5,7 @@ import Button from "@material-ui/core/Button";
 import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpwardRounded';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import WarningBar from "./Bars/Warning.bar"
 import {Link} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles"
 import {reducerSign} from "../dispatchers/LogSign.dispatcher"
@@ -40,7 +39,7 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
 
     })
     const [openError, setOpenError] = React.useState(false);
-    const [openSuccess, setOpenSuccess] = React.useState(true);
+    const [openSuccess, setOpenSuccess] = React.useState(false);
     const onSubmit = async (e : any) => {
         e.preventDefault()
         try {
@@ -141,14 +140,8 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                     </form>
                     
                 </div>
-                <Snackbar open = {openError} autoHideDuration = {6000} onClose = {handlerWarning}>
-                    <MuiAlert onClose = {handlerWarning} variant = "filled" severity = "error" color = "error" elevation = {6} > ERROR: El correo ya ha sido registrado previamente en nuestra página. </MuiAlert>
-                    
-                </Snackbar>
-                <Snackbar open = {openSuccess} autoHideDuration = {6000} onClose = {handlerSuccess}>
-                    <MuiAlert onClose = {handlerSuccess} variant = "filled" severity = "success" color = "success" elevation = {6} > Registro con exito. Ahora puede <Link style = {{color: "#f3bda1"}} to = "/login">iniciar sesion</Link>.</MuiAlert>
-                    
-                </Snackbar>
+                <WarningBar errorState = {openError} handler = {handlerWarning} > ERROR: El correo ya ha sido registrado previamente en nuestra página. </WarningBar>
+                
             </div>
         </>
     );
