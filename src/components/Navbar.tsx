@@ -2,10 +2,16 @@ import React from 'react';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import {useHistory} from "react-router-dom"
 import Button from "@material-ui/core/Button";
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import { Drawer, List, ListItem } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import "../styles/Navbar.css"
+
 interface navProps {
 
-    variant ?: "log" | "normal" | "signin"
+    variant ?: "log" | "normal" | "signin",
+    handler ?: any
 
 }
 
@@ -19,8 +25,13 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
         else
             history.push("/login")
     }
+    const [drawer, setDrawer] = React.useState(false);
+    const handlerDrawer = () => {
+        setDrawer(!drawer)
+    }
 
     return (
+        <>
         <header>
             <nav>
                 {props.variant !== "normal" ?  
@@ -38,11 +49,15 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                         </>
                     :
                         <>
-                            <div>
-                                <p className = 'nav-title'>
-                                    Assit-/ATAM/-
-                                </p>
-                                <p className = 'nav-subtitle'>Asistente durante el covid</p>
+                            <div className = 'normal__nav'>
+                                <button onClick = {handlerDrawer} id = 'button__nav'><MenuIcon/></button>
+                                <div>
+                                    <p className = 'nav-title'>
+                                        
+                                        Assit-/ATAM/-
+                                    </p>
+                                    <p className = 'nav-subtitle'>Asistente durante el covid</p>
+                                </div>
                             </div>
                             <Button startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
                             size = "small" > Salir </Button>
@@ -50,7 +65,15 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                 }
             </nav>
         </header>
-        
+        <Drawer open = {drawer} anchor = 'left' onClose = {handlerDrawer}>
+            <List>
+                <ListItem>
+                    <TextField placeholder = "#Codigo de amigo" />
+                    <Button style = {{backgroundColor: "transparent"}} disableRipple = {true} disableFocusRipple = {true} startIcon = {<SearchIcon/>}>Buscar</Button>
+                </ListItem>
+            </List>
+        </Drawer>
+        </>
     );
 }
 

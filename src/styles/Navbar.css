@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans:wght@400;700&display=swap');
+.normal__nav{
+    display: flex;
+}
 nav{
     background-color: white;
     height: 3.8em;
@@ -8,6 +11,13 @@ nav{
     display: flex;
     justify-content: space-between;
     padding: 1%;
+}
+
+#button__nav{
+    border: none;
+    background-color: white;
+    margin-right: 15px;
+    cursor: pointer;
 }
 
 .nav-title{

@@ -42,6 +42,8 @@ const Home = () => {
         
     }
 
+    
+
     return (
         <Layout>
             <h1>Homepage</h1>
@@ -56,6 +58,7 @@ const Home = () => {
                     color = '#000'
                 />
             </div>
+            
             
         </Layout>
     );
