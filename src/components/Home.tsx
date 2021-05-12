@@ -3,10 +3,19 @@ import Layout from './Layout/Layout';
 import {Bar} from "react-chartjs-2"
 import Avatar from '@material-ui/core/Avatar';
 import {useHistory } from 'react-router-dom';
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import {PhotoCamera, Publish} from '@material-ui/icons';
 import { Button } from '@material-ui/core';
-const Home = () => {
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    selectPhotoButton : {borderTopRightRadius : "0", borderBottomRightRadius: "0"},
+    upPhotoButton : {borderTopLeftRadius : "0", borderBottomLeftRadius: "0"}
+})
+
+
+const Home : React.FC = () : JSX.Element => {
     const fileRef = React.useRef<HTMLImageElement>(null)
+    const styles = useStyles()
     const hist = useHistory()
     useEffect( () => {
         if(localStorage.getItem("token") == null)
@@ -64,7 +73,8 @@ const Home = () => {
             <div style = {{marginTop : "15px"}}>
                     <input onChange = {inputFileOnCh} style = {{display:'none'}} id = "pic-picker" accept = "image/*" type="file" name="example" />
                     <label htmlFor="pic-picker">
-                        <Button startIcon = {<PhotoCameraIcon/>} component = "span" variant = "contained" color = "primary" /*onClick = {(e) => {
+                        <Button className = {styles.selectPhotoButton} startIcon = {<PhotoCamera/>} component = "span" variant = "contained" color = "primary"
+                         /*onClick = {(e) => {
                             
                             const formData = new FormData()
                             formData.append('perfil', fileRef.current!.files![0])
@@ -78,9 +88,12 @@ const Home = () => {
                                 console.log(err)
                             })
                             
-                        }}*/> Seleccionar foto </Button>
+                        }}*/
+                        > Seleccionar foto </Button>
                     </label>
+                    <Button className = {styles.upPhotoButton} startIcon = {<Publish />} variant = "contained" color = "secondary" >Subir foto</Button>
             </div>
+            
             <img style = {{height : "auto/2", width : "auto/2", marginTop : "15px"}} ref = {fileRef} src="" alt="" />
             <p>Alfredo Lino Mendoza</p>
             <div className="plot">
