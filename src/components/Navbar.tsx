@@ -34,6 +34,8 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
         localStorage.removeItem("token");
         localStorage.removeItem("email");
         localStorage.removeItem("nombre");
+        localStorage.removeItem("pf")
+        localStorage.removeItem("id")
         history.push("/login")
     }
     return (

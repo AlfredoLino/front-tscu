@@ -6,17 +6,14 @@ import {useHistory } from 'react-router-dom';
 import {PhotoCamera, Publish, Cancel} from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 import { server } from '../ngrok_server';
-import IconButton from '@material-ui/core/IconButton';
 import SuccessBar from './Bars/Success.bar';
 import "../styles/Home.css"
-import { useRef } from 'react';
-
 
 const Home : React.FC = () : JSX.Element => {
     
     const fileRef = React.useRef<HTMLImageElement>(null)
     const uploadRef = React.useRef<HTMLInputElement>(null)
-    const [photoUrl, setPhotoUrl] = React.useState(`${server.adress}/user/${localStorage.getItem("pf")}`);
+    const [photoUrl, setPhotoUrl] = React.useState( localStorage.getItem("pf") === 'null' ? `${server.adress}/nopicture.png`:`${server.adress}/user/${localStorage.getItem("pf")}` );
     const [isUpOk, setUpOk] = React.useState(false)
     const hist = useHistory()
     const options = {
@@ -104,7 +101,7 @@ const Home : React.FC = () : JSX.Element => {
     
     const [profilePic, setProfilePic] = React.useState<File>();
     useEffect( () => {
-        console.log(localStorage.getItem("pf"))
+        console.log(localStorage.getItem("pf") === 'null')
         if(localStorage.getItem("token") == null)
             hist.push("/login")
     } )
@@ -117,7 +114,7 @@ const Home : React.FC = () : JSX.Element => {
         <Layout>
             <h1 className = "text-center">Homepage</h1>
 
-            <img ref = {fileRef} style = {{height: "200px", width:"200px"}} className = "avatar" src = { localStorage.getItem("pf") ? photoUrl : `${server.adress}/nopicture.png` } />
+            <img ref = {fileRef} style = {{height: "200px", width:"200px"}} className = "avatar" src = { photoUrl } />
             
             <h3 className = "text-center">{localStorage.getItem("nombre")}</h3>
             <p className = "text-center"> <i>{localStorage.getItem("email")}</i> </p>
