@@ -32,6 +32,8 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("email");
+        localStorage.removeItem("nombre");
         history.push("/login")
     }
     return (
@@ -44,7 +46,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                 <p className = 'nav-title'>
                                     Assist-/ATAM/-
                                 </p>
-                                <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.0</i></span> </p>
+                                <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.1</i></span> </p>
                             </div>
                             {props.variant === "log" && <Button onClick = {handlerLink} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
                             size = "small" > Registrarse </Button> }
@@ -60,7 +62,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                         
                                         Assit-/ATAM/-
                                     </p>
-                                    <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.0</i></span></p>
+                                    <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.1</i></span></p>
                                 </div>
                             </div>
                             <Button onClick = {logout} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  

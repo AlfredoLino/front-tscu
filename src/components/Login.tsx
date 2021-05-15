@@ -59,6 +59,10 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
             if(res.ok){
                 
                 localStorage.setItem("token", res.token)
+                localStorage.setItem("email", res.email)
+                localStorage.setItem("nombre", res.nombre)
+                localStorage.setItem("id", res.id)
+                localStorage.setItem("pf", res.pf)
                 history.push("/")
 
             }else{
@@ -89,6 +93,10 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
                         <ArrowForwardIcon />
                         Login
                     </h3>
+                </div>
+                <div className="logo-containt">
+                    
+                    <img className = "logo" src="https://46b1fdd0571c.ngrok.io/covidatam.png" alt="logo" />
                 </div>
                 <hr/>
                 <div className = "lc-fields">

@@ -32,6 +32,7 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
     const history = useHistory()
     const [state, dispatch] = useReducer(reducerSign, {
         email: "",
+        nombre: "",
         password: "",
         passwordConf: ""
 
@@ -48,7 +49,8 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                 },
                 body: JSON.stringify({
                     email: state.email,
-                    pass: state.password
+                    pass: state.password,
+                    nombre: state.nombre
                 }
                 )
             })
@@ -69,6 +71,8 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
     const checkPassLength = () : JSX.Element => state.password.length >= 8 ? <CheckRoundedIcon color = "primary" /> : <CloseIcon color = "error" />
 
     const checkEmail = () : JSX.Element => state.email.includes("@")  ? <CheckRoundedIcon color = "primary" /> : <CloseIcon color = "error" />
+
+    const checkNombre = () : JSX.Element => state.nombre.length >= 3  ? <CheckRoundedIcon color = "primary" /> : <CloseIcon color = "error" />
     
     const checkPass = () : JSX.Element => state.password === state.passwordConf && state.password.length >= 8 
     ? <CheckRoundedIcon color = "primary" /> : <CloseIcon color = "error" />
@@ -78,6 +82,10 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
     const handlerEmail = (e: inputEvent) => 
     {
         dispatch({action: "setEmail", email: e.target.value})
+    }
+    const handlerNombre = (e: inputEvent) => 
+    {
+        dispatch({action: "setNombre", nombre: e.target.value})
     }
     const handlerPass = (e: inputEvent) => 
     {
@@ -114,11 +122,17 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                     <ArrowUpwardRoundedIcon />
                     Registrarse</h3>
                 </div>
+                <div className="logo-containt">
+                    
+                    <img className = "logo" src="https://46b1fdd0571c.ngrok.io/covidatam.png" alt="logo" />
+                </div>
                 <hr/>
                 <div className = "lc-fields">
                     <form>
                         <TextField value = {state.email} onChange = {handlerEmail} 
                             className = "txtfield" label = "Email" variant="outlined"/>
+                        <TextField value = {state.nombre} onChange = {handlerNombre} 
+                            className = "txtfield" label = "Nombre" variant="outlined"/>
                         <TextField value = {state.password} onChange = {handlerPass} 
                             type = "password" className = "txtfield" label = "Contraseña" variant="outlined"/>
                         <TextField value = {state.passwordConf} onChange = {handlerPassConf} 
@@ -126,6 +140,7 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                         <p> {checkPassLength()} Contraseña con almenos 8 caracteres.</p>
                         <p> {checkPass()} Contraseñas iguales.</p>
                         <p> {checkEmail()} Email válido.</p>
+                        <p>{checkNombre()} Nombre</p>
                 
                         <Button 
                             disabled = {formIsOk()}

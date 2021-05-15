@@ -7,12 +7,17 @@ import {PhotoCamera, Publish, Cancel} from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 import { server } from '../ngrok_server';
 import IconButton from '@material-ui/core/IconButton';
+import SuccessBar from './Bars/Success.bar';
 import "../styles/Home.css"
+import { useRef } from 'react';
+
 
 const Home : React.FC = () : JSX.Element => {
-
+    
     const fileRef = React.useRef<HTMLImageElement>(null)
     const uploadRef = React.useRef<HTMLInputElement>(null)
+    const [photoUrl, setPhotoUrl] = React.useState(`${server.adress}/user/${localStorage.getItem("pf")}`);
+    const [isUpOk, setUpOk] = React.useState(false)
     const hist = useHistory()
     const options = {
         scales: {
@@ -47,17 +52,29 @@ const Home : React.FC = () : JSX.Element => {
         ]
         
     }
+    const [isUploading, setUploading] = React.useState(false);
 
     const onUploadFile = () => {
-                            
+        setUploading(true)
+        const pFile = uploadRef.current!.files![0]
         const formData = new FormData()
-        formData.append('perfil', uploadRef.current!.files![0])
-
-        fetch(`${server.adress}/upload/17070714`, {
+        
+            formData.append('perfil', pFile)
+        
+        console.log(uploadRef.current!.files![0].name)
+        fetch(`${server.adress}/upload/${localStorage.getItem("id")}`, {
             method: "POST",
             body: formData
         }).then(res => {
-            console.log(res);
+            if(res.ok){
+                localStorage.setItem("pf", `${localStorage.getItem("id")}${pFile.name}`)
+                setPhotoUrl(`${localStorage.getItem("id")}${pFile.name}`)
+                fileRef.current!.src = `${server.adress}/user/${localStorage.getItem("pf")}`
+                console.log(res)
+                setUploading(false)
+                setUpOk(true)
+                setProfilePic(undefined)
+            }
         }).catch( err => {
             console.log(err)
         })
@@ -65,48 +82,68 @@ const Home : React.FC = () : JSX.Element => {
     }
 
     const quitPhoto = () => {
+        
+        setPhotoUrl(`${server.adress}/user/${localStorage.getItem("pf")}`)
         setProfilePic(undefined)
     }
     
     const inputFileOnCh = (e : React.ChangeEvent<HTMLInputElement>) => {
         
-        setProfilePic(e.target!.files![0])
-        var reader = new FileReader()
-        reader.readAsDataURL(e.target!.files![0])
-        reader.onload = (ev : ProgressEvent<FileReader>) => {
-            fileRef.current!.src = reader.result!.toString()
+        if(e.target!.files![0]){
+            setProfilePic(e.target!.files![0])
+            var reader = new FileReader()
+            reader.readAsDataURL(e.target!.files![0])
+            reader.onload = (ev : ProgressEvent<FileReader>) => {
+                //fileRef.current!.src = reader.result!.toString()
+                setPhotoUrl(reader.result!.toString())
+            }
+        }else{
+            return
         }
     }
     
-
     const [profilePic, setProfilePic] = React.useState<File>();
     useEffect( () => {
+        console.log(localStorage.getItem("pf"))
         if(localStorage.getItem("token") == null)
             hist.push("/login")
     } )
+
+    const handlerSucc = () => {
+        setUpOk(!isUpOk)
+    }
+
     return (
         <Layout>
             <h1 className = "text-center">Homepage</h1>
 
-            <Avatar style = {{height: "200px", width:"200px"}} className = "avatar" src = {`${server.adress}/user/pp.jpg`} />
+            <img ref = {fileRef} style = {{height: "200px", width:"200px"}} className = "avatar" src = { localStorage.getItem("pf") ? photoUrl : `${server.adress}/nopicture.png` } />
             
-            <p className = "text-center">Alfredo Lino Mendoza</p>
+            <h3 className = "text-center">{localStorage.getItem("nombre")}</h3>
+            <p className = "text-center"> <i>{localStorage.getItem("email")}</i> </p>
+
             <div style = {{marginTop : "15px"}}>
-                    <input onChange = {inputFileOnCh} style = {{display:'none'}} ref = {uploadRef} id = "pic-picker" accept = "image/*" type="file" name="example" />
+                    <input onChange = {inputFileOnCh} disabled = {isUploading} style = {{display:'none'}} ref = {uploadRef} id = "pic-picker" accept = "image/*" type="file" name="example" />
                     <label htmlFor="pic-picker">
-                        <Button className = "picker_photo" startIcon = {<PhotoCamera/>} component = "span" variant = "contained" color = "primary"> Seleccionar foto </Button>
+                        <Button disabled = {isUploading} className = "picker_photo" startIcon = {<PhotoCamera/>} component = "span" variant = "contained" color = "primary"> Seleccionar foto </Button>
                     </label>
-                    <Button className = "upload_photo" onClick = {onUploadFile} disabled = {profilePic ? false : true} startIcon = {<Publish />} variant = "contained" color = "secondary" >Subir foto</Button>
+                    <Button className = "upload_photo" onClick = {onUploadFile} disabled = {profilePic && !isUploading  ? false : true} startIcon = {<Publish />} variant = "contained" color = "secondary" >{isUploading ? "Subiendo foto..." : "Subir Foto"}</Button>
+                    <Button className = "cancel_photo" variant = "contained" color = "primary" onClick = {quitPhoto} disabled = {profilePic && !isUploading  ? false : true} > Cancelar </Button>
             </div>
             
             {profilePic && 
             <div className = "photo-p-container">
-                <img className = "profile_photo" ref = {fileRef} />
-                <IconButton onClick = {quitPhoto} className = "a-button"  > <Cancel /> </IconButton>
+                <img className = "profile_photo" />
+                
                 
 
             </div>
             }
+            
+            <SuccessBar successState = {isUpOk} handler = {handlerSucc}> Imagen subida con exito </SuccessBar>
+
+            
+
             {/** 
              * 
              <div className="plot">
