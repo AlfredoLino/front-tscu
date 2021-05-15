@@ -46,7 +46,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                 <p className = 'nav-title'>
                                     Assist-/ATAM/-
                                 </p>
-                                <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.1</i></span> </p>
+                                <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.2</i></span> </p>
                             </div>
                             {props.variant === "log" && <Button onClick = {handlerLink} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
                             size = "small" > Registrarse </Button> }
@@ -62,7 +62,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                         
                                         Assit-/ATAM/-
                                     </p>
-                                    <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.1</i></span></p>
+                                    <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.2</i></span></p>
                                 </div>
                             </div>
                             <Button onClick = {logout} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
