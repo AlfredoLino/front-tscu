@@ -10,14 +10,11 @@ import SuccessBar from "./Bars/Success.bar"
 import {Link} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles"
 import {reducerSign} from "../dispatchers/LogSign.dispatcher"
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
+import {server} from "../ngrok_server"
 import "../styles/Signin.css"
 const useStyles = makeStyles({
-    txtfield: {
-        width: "25em",
-        marginTop: "5px",
-        marginBottom : "5px"
-    },
+    
     btnLog: {
         marginTop: "5px"
     },
@@ -40,11 +37,11 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
 
     })
     const [openError, setOpenError] = React.useState(false);
-    const [openSuccess, setOpenSuccess] = React.useState(true);
+    const [openSuccess, setOpenSuccess] = React.useState(false);
     const onSubmit = async (e : any) => {
         e.preventDefault()
         try {
-            const req = await fetch("http://localhost:8080/signin",{
+            const req = await fetch(`${server.adress}/signin`,{
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json"
@@ -64,7 +61,7 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                 
             }
         } catch (error) {
-            console.log("ERROR")
+            setOpenError(true)
         }
         
     } 
@@ -121,11 +118,11 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                 <div className = "lc-fields">
                     <form>
                         <TextField value = {state.email} onChange = {handlerEmail} 
-                            className = {classes.txtfield} label = "Usuario" variant="outlined"/>
+                            className = "txtfield" label = "Email" variant="outlined"/>
                         <TextField value = {state.password} onChange = {handlerPass} 
-                            type = "password" className = {classes.txtfield} label = "Contraseña" variant="outlined"/>
+                            type = "password" className = "txtfield" label = "Contraseña" variant="outlined"/>
                         <TextField value = {state.passwordConf} onChange = {handlerPassConf} 
-                            type = "password" className = {classes.txtfield} label = "Confirmar Contraseña" variant="outlined"/>
+                            type = "password" className = "txtfield" label = "Confirmar Contraseña" variant="outlined"/>
                         <p> {checkPassLength()} Contraseña con almenos 8 caracteres.</p>
                         <p> {checkPass()} Contraseñas iguales.</p>
                         <p> {checkEmail()} Email válido.</p>
@@ -134,7 +131,7 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                             disabled = {formIsOk()}
                             onClick = {onSubmit}
                             type = "submit"
-                            className = {classes.btnLog} 
+                            className = "submit_b"
                             startIcon = {<ArrowUpwardRoundedIcon />} 
                             color = 'primary' variant = "contained" size = "large" > Registrarse
                         </Button>

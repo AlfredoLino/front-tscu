@@ -30,6 +30,10 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
         setDrawer(!drawer)
     }
 
+    const logout = () => {
+        localStorage.removeItem("token");
+        history.push("/login")
+    }
     return (
         <>
         <header>
@@ -40,7 +44,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                 <p className = 'nav-title'>
                                     Assist-/ATAM/-
                                 </p>
-                                <p className = 'nav-subtitle'>Asistente durante el covid</p>
+                                <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.0</i></span> </p>
                             </div>
                             {props.variant === "log" && <Button onClick = {handlerLink} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
                             size = "small" > Registrarse </Button> }
@@ -56,10 +60,10 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                         
                                         Assit-/ATAM/-
                                     </p>
-                                    <p className = 'nav-subtitle'>Asistente durante el covid</p>
+                                    <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.0</i></span></p>
                                 </div>
                             </div>
-                            <Button startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
+                            <Button onClick = {logout} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
                             size = "small" > Salir </Button>
                         </>
                 }

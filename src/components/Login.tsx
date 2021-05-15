@@ -10,20 +10,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 import "../styles/Login.css"
 import { reducerLog } from '../dispatchers/Log.reducer';
 import { useHistory } from 'react-router-dom';
+import {server} from "../ngrok_server";
 
-
-
-
-const useStyles = makeStyles({
-    txtfield: {
-        width: "25em",
-        marginTop: "5px",
-        marginBottom : "5px"
-    },
-    btnLog: {
-        marginTop: "5px"
-    }
-})
 
 
 
@@ -31,7 +19,6 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
 
     const history = useHistory()
 
-    const classes = useStyles()
     const [open , setOpen] = React.useState<boolean>(false);
 
     const [state, dispatch] = React.useReducer(reducerLog, {
@@ -57,7 +44,7 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
     const handlerLog = async (e : submitEvent) => {
         e.preventDefault()
         try {
-            const req = await fetch('http://localhost:8080/login', {
+            const req = await fetch(`${server.adress}/login`, {
                 method : "POST",
                 headers : {
                     "Content-Type" : "application/json"
@@ -106,9 +93,9 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
                 <hr/>
                 <div className = "lc-fields">
                     <form>
-                        <TextField onChange = {handlerEmail} value = {state.email} className = {classes.txtfield} label = "Usuario" variant="outlined"/>
-                        <TextField onChange = {handlerPass} value = {state.password} className = {classes.txtfield} label = "Contraseña" variant="outlined"/>
-                        <Button type = "submit" className = {classes.btnLog} startIcon = {<ArrowForwardIcon />} 
+                        <TextField onChange = {handlerEmail} value = {state.email} className = "txtfield" label = "Usuario" variant="outlined"/>
+                        <TextField onChange = {handlerPass} value = {state.password} className = "txtfield" label = "Contraseña" variant="outlined"/>
+                        <Button type = "submit" className = "submit_b" startIcon = {<ArrowForwardIcon />} 
                         color = 'primary' variant = "contained" size = "large" 
                         onClick = {handlerLog}
                         > Entrar </Button>

@@ -11,12 +11,38 @@
 .login-card h3{
     text-align: center;
     font-size: 3em;
-    width: 5em;
     margin: 0 auto 0 auto;
 }
 
 .lc-fields{
-    width: 25em;
     margin: 0 auto 0 auto;
     padding-bottom: 50px;
+}
+
+.txtfield{
+    width: 100% !important;
+}
+
+.submit_b{
+    margin-top: 15px;
+    display: inline-block;
+    width: 100%;
+}
+@media (max-width:650px){
+    .login-card{
+        width: 315px;
+    }
+
+    .lc-fields{
+        width: 290px;
+    }
+    .txtfields {
+        width: 100% !important;
+        margin: 5px !important;
+    }
+    .submit_b{
+        margin-top: 15px;
+        display: inline-block;
+        width: 100%;
+    }
 }
