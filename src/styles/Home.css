@@ -1,0 +1,71 @@
+.profile_photo{
+    width: 10%;
+    height: 10%;
+}
+
+.avatar{
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    margin: 25px auto 0 auto;
+    display: block;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.picker_photo{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.cancel_photo{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+.upload_photo {
+    border-radius: 0 !important;
+}
+
+.photo-p-container{
+    position: relative !important;
+}
+.a-button{
+    position: absolute!important;
+    top: 0!important;
+    left: 90%!important;
+}
+
+@media (max-width: 640px){
+    .avatar{
+        height: 200px;
+        width: 200px;
+        
+        margin: 25px auto 0 auto;
+        display: block;
+    }
+    .profile_photo{
+        margin: 25px auto 0 auto;
+        display: block;
+        width: 50%;
+        height: 50%;
+    }
+
+    
+    .upload_photo, .cancel_photo, .picker_photo{
+        
+        border-radius: 0 !important;
+        width: 100%;
+    }
+
+    .photo-p-container{
+        position: relative !important;
+    }
+    .a-button{
+        position: absolute !important;
+        top: 0 !important;
+        left: 90%;
+    }
+    
+}
