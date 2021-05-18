@@ -6,6 +6,7 @@ import {PhotoCamera, Publish, Cancel} from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 import { server } from '../ngrok_server';
 import SuccessBar from './Bars/Success.bar';
+import Bitacora from "./Bitacora"
 import "../styles/Home.css"
 
 const Home : React.FC = () : JSX.Element => {
@@ -64,7 +65,7 @@ const Home : React.FC = () : JSX.Element => {
         }).then(res => {
             if(res.ok){
                 localStorage.setItem("pf", `${localStorage.getItem("id")}${pFile.name}`)
-                setPhotoUrl(`${localStorage.getItem("id")}${pFile.name}`)
+                setPhotoUrl(`${server.adress}/user/${localStorage.getItem("pf")}`)
                 fileRef.current!.src = `${server.adress}/user/${localStorage.getItem("pf")}`
                 console.log(res)
                 setUploading(false)
@@ -135,6 +136,10 @@ const Home : React.FC = () : JSX.Element => {
 
             </div>
             }
+
+            <hr />
+
+            <Bitacora photo = {photoUrl} />
             
             <SuccessBar successState = {isUpOk} handler = {handlerSucc}> Imagen subida con exito </SuccessBar>
 

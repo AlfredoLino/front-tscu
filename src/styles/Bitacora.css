@@ -1,0 +1,71 @@
+@import url("../styles/vars.css");
+.title-bitacora{
+    text-align: center;
+    font-weight: normal;
+}
+
+.content-informe{
+    background-color: white;
+    padding: 1%;
+}
+
+ul{
+    padding: 0;
+    margin-top: 3%;
+    list-style: none;
+}
+
+li{
+    margin: 20px 0 20px 0;
+}
+
+.informe{
+    box-shadow: 0px 10px 13px -7px #687980, 0px 0px 3px 3px rgba(0,0,0,0.26);
+    
+    margin: 0 auto 0 auto;
+    width: 50%;
+    padding: 3%;
+}
+
+.photo-informe{
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+}
+
+header{
+    display: flex;
+    justify-content:space-between;
+}
+
+
+
+.photo-name-bitacora{
+    display: flex;
+}
+.photo-name-bitacora h2{
+    margin: auto;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.text-informe{
+    margin-top: 3%;
+    text-align: justify;
+}
+
+.email-bitacora{
+    font-style: italic;
+}
+
+
+@media (max-width:650px){
+    header{
+        display: block;
+    }
+
+    .informe{
+        padding: 5%;
+        width: 90%;
+    }
+}
