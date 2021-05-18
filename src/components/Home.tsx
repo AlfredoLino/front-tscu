@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import Layout from './Layout/Layout';
 //import {Bar} from "react-chartjs-2"
-import Avatar from '@material-ui/core/Avatar';
 import {useHistory } from 'react-router-dom';
 import {PhotoCamera, Publish, Cancel} from '@material-ui/icons';
 import { Button } from '@material-ui/core';

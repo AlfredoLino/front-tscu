@@ -3,7 +3,6 @@ import Navbar from "./Navbar"
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {makeStyles} from "@material-ui/core/styles"
 import {logProps} from "../interfaces/LogProps"
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -27,7 +26,9 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
         password: ""
         
     })
-
+    React.useEffect(() => {
+        console.log(localStorage.getItem("id") == null);
+    }, [])
 
     type inputEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     
@@ -96,7 +97,7 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
                 </div>
                 <div className="logo-containt">
                     
-                    <img className = "logo" src="https://46b1fdd0571c.ngrok.io/covidatam.png" alt="logo" />
+                    <img className = "logo" src= {`${server.adress}/covidatam.png`} alt="logo" />
                 </div>
                 <hr/>
                 <div className = "lc-fields">

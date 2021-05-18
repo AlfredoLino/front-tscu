@@ -124,7 +124,7 @@ const Signin : React.FC<logProps> = (props) : JSX.Element => {
                 </div>
                 <div className="logo-containt">
                     
-                    <img className = "logo" src="https://46b1fdd0571c.ngrok.io/covidatam.png" alt="logo" />
+                    <img className = "logo" src={`${server.adress}/covidatam.png`} alt="logo" />
                 </div>
                 <hr/>
                 <div className = "lc-fields">

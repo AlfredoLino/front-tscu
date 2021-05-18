@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Drawer, List, ListItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import "../styles/Navbar.css"
+import IconButton from '@material-ui/core/IconButton';
 
 interface navProps {
 
@@ -77,7 +78,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
             <List>
                 <ListItem>
                     <TextField placeholder = "#Codigo de amigo" />
-                    <Button style = {{backgroundColor: "transparent"}} disableRipple = {true} disableFocusRipple = {true} startIcon = {<SearchIcon/>}>Buscar</Button>
+                    <IconButton><SearchIcon/> </IconButton>
                 </ListItem>
             </List>
         </Drawer>
