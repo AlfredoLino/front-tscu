@@ -33,7 +33,7 @@ li{
     height: 45px;
 }
 
-header{
+.header-informe{
     display: flex;
     justify-content:space-between;
 }
@@ -48,7 +48,6 @@ header{
     margin-left: 10px;
     font-weight: normal;
 }
-
 .text-informe{
     margin-top: 3%;
     text-align: justify;
@@ -58,9 +57,29 @@ header{
     font-style: italic;
 }
 
+form{
+    width: 65%;
+    margin: auto;
+}
+
+.submit-form{
+    background : linear-gradient(90deg, #02475e, #fefecc);
+    font-weight : bold !important;
+    width : 75%;
+    display : block !important;
+    margin : 15px auto !important;
+    border-radius: 0 !important;
+}
 
 @media (max-width:650px){
-    header{
+
+    form{
+        width: 100%;
+    }
+    .submit-form{
+        width: 85%;
+    }
+    .header-informe{
         display: block;
     }
 
