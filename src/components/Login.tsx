@@ -102,7 +102,7 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
                 <div className = "lc-fields">
                     <form>
                         <TextField onChange = {handlerEmail} value = {state.email} className = "txtfield" label = "Usuario" variant="outlined"/>
-                        <TextField onChange = {handlerPass} value = {state.password} className = "txtfield" label = "Contraseña" variant="outlined"/>
+                        <TextField type = "password" onChange = {handlerPass} value = {state.password} className = "txtfield" label = "Contraseña" variant="outlined"/>
                         <Button type = "submit" className = "submit_b" startIcon = {<ArrowForwardIcon />} 
                         color = 'primary' variant = "contained" size = "large" 
                         onClick = {handlerLog}

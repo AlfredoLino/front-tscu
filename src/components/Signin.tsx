@@ -28,7 +28,6 @@ interface logProps {
 }
 
 const Signin : React.FC<logProps> = (props) : JSX.Element => {
-    const classes = useStyles()
     const history = useHistory()
     const [state, dispatch] = useReducer(reducerSign, {
         email: "",

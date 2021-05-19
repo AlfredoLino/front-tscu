@@ -1,4 +1,3 @@
-import { Home } from '@material-ui/icons';
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 

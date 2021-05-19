@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Layout from './Layout/Layout';
 //import {Bar} from "react-chartjs-2"
 import {useHistory } from 'react-router-dom';
-import {PhotoCamera, Publish, Cancel} from '@material-ui/icons';
+import {PhotoCamera, Publish} from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 import { server } from '../ngrok_server';
 import SuccessBar from './Bars/Success.bar';
@@ -16,6 +16,7 @@ const Home : React.FC = () : JSX.Element => {
     const [photoUrl, setPhotoUrl] = React.useState( localStorage.getItem("pf") === 'null' ? `${server.adress}/nopicture.png`:`${server.adress}/user/${localStorage.getItem("pf")}` );
     const [isUpOk, setUpOk] = React.useState(false)
     const hist = useHistory()
+    /*
     const options = {
         scales: {
             yAxes: [
@@ -49,6 +50,7 @@ const Home : React.FC = () : JSX.Element => {
         ]
         
     }
+    */
     const [isUploading, setUploading] = React.useState(false);
 
     const onUploadFile = () => {
@@ -114,7 +116,7 @@ const Home : React.FC = () : JSX.Element => {
         <Layout>
             <h1 className = "text-center">Homepage</h1>
 
-            <img ref = {fileRef} style = {{height: "200px", width:"200px"}} className = "avatar" src = { photoUrl } />
+            <img alt = "profilepick" ref = {fileRef} style = {{height: "200px", width:"200px"}} className = "avatar" src = { photoUrl } />
             
             <h3 className = "text-center">{localStorage.getItem("nombre")}</h3>
             <p className = "text-center"> <i>{localStorage.getItem("email")}</i> </p>
@@ -130,7 +132,7 @@ const Home : React.FC = () : JSX.Element => {
             
             {profilePic && 
             <div className = "photo-p-container">
-                <img className = "profile_photo" />
+                <img alt = "pickedphoto" className = "profile_photo" />
                 
                 
 
