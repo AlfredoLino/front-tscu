@@ -10,10 +10,7 @@ interface pHome {
 }
 
 const PrivateRoute : React.FC<pHome> = ({component: Component, isPrivate, ...rest}) : JSX.Element => {
-    React.useEffect(() => {
-        console.log(localStorage.getItem("token"));
-        
-    }, [])
+    
     return (
         <Route {...rest}
             render = {props => (
