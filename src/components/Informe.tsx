@@ -3,9 +3,10 @@ import React from 'react';
 interface InformeInterface{
     photo : string,
     date : string,
+    content: string
 }
 
-const Informe : React.FC<InformeInterface> = ({photo, date}) : JSX.Element => {
+const Informe : React.FC<InformeInterface> = ({photo, date, content}) : JSX.Element => {
     return (
         <article className="informe">
             <div className="content-informe">
@@ -26,7 +27,7 @@ const Informe : React.FC<InformeInterface> = ({photo, date}) : JSX.Element => {
                     </div>
                 </header>
                 <section className="text-informe">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce malesuada lacinia placerat. Quisque venenatis hendrerit sem, quis sagittis metus varius sed. Nunc consequat condimentum tellus sit amet gravida. Sed mi ex, mollis sit amet turpis posuere, condimentum sollicitudin ex. Donec eu tortor dignissim, semper magna vitae, rutrum metus. Vivamus ac mi volutpat, venenatis dolor et, mollis ante. Maecenas laoreet mi mi, at interdum turpis egestas ut. Nulla id placerat nunc. Vivamus vitae fermentum dui. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    {content}
                 </section>
             </div>
         </article>

@@ -10,6 +10,7 @@ import "../styles/Login.css"
 import { reducerLog } from '../dispatchers/Log.reducer';
 import { useHistory } from 'react-router-dom';
 import {server} from "../ngrok_server";
+import { inputEvent, submitEvent } from '../types/InputTypes';
 
 
 
@@ -30,7 +31,6 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
         console.log(localStorage.getItem("id") == null);
     }, [])
 
-    type inputEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     
     const handlerEmail = (e : inputEvent) => {
         dispatch({action: "setEmail",  email : e.target.value})
@@ -40,7 +40,6 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
         dispatch({action: "setPass", pass : e.target.value})
     }
 
-    type submitEvent = React.MouseEvent<HTMLButtonElement | MouseEvent>
     
     const handlerLog = async (e : submitEvent) => {
         e.preventDefault()

@@ -1,4 +1,6 @@
-export const dateFormatter = (date : Date) : string  => {
-    let dateString = date.toISOString()
-    return `${dateString.split("T")[0]}/${date.toTimeString().split(" ")[0]}`
+export const dateFormatter = (dateString : String) : string  => {
+    
+    const [fecha, horarw] = dateString.split("T")
+    const hora = horarw.split(".")[0]
+    return `${fecha}/${hora}`
 }
