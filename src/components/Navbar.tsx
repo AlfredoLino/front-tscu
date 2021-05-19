@@ -8,6 +8,7 @@ import { Drawer, List, ListItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import "../styles/Navbar.css"
 import IconButton from '@material-ui/core/IconButton';
+import { server } from '../ngrok_server';
 
 interface navProps {
 
@@ -49,7 +50,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                 <p className = 'nav-title'>
                                     Assist-/ATAM/-
                                 </p>
-                                <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.2</i></span> </p>
+                                <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v{server.adress}</i></span> </p>
                             </div>
                             {props.variant === "log" && <Button onClick = {handlerLink} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
                             size = "small" > Registrarse </Button> }
@@ -65,7 +66,7 @@ const Navbar : React.FC<navProps> = (props) : JSX.Element => {
                                         
                                         Assit-/ATAM/-
                                     </p>
-                                    <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v1.2</i></span></p>
+                                    <p className = 'nav-subtitle'>Asistente durante el covid <span><i>v{server.version}</i></span></p>
                                 </div>
                             </div>
                             <Button onClick = {logout} startIcon = {<ArrowForwardIcon />} color = 'secondary' variant = "text"  
