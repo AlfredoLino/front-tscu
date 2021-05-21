@@ -40,11 +40,14 @@ const Bitacora : React.FC<BitacoraInterface> = ( {photo} ) : JSX.Element => {
     
     return (
         <>
-            <h1 className = "title-bitacora">Bitacora: </h1>
-            <form>
-                <TextField value = {informe} onChange = {onChangeInforme} fullWidth className = "input-informe"  variant = "outlined" label = "Nuevo informe" multiline rows = {4} />
-                <Button onClick = {onSubmitInforme} className = "submit-form" type = "submit" variant = "contained" >Crear Informe</Button>
-            </form>
+            <section className = "header-bitacora">
+
+                <h1 className = "title-bitacora">Bitacora: </h1>
+                <form>
+                    <TextField value = {informe} onChange = {onChangeInforme} fullWidth className = "input-informe"  variant = "outlined" label = "Nuevo informe" multiline rows = {4} />
+                    <Button onClick = {onSubmitInforme} className = "submit-form" type = "submit" variant = "contained" >Crear Informe</Button>
+                </form>
+            </section>
             <ul>
                 <li>
                     {informes && informes!.map((rec) => <Informe content = {rec.informe} photo = {photo} date = {dateFormatter(rec.createdAt)} />)}

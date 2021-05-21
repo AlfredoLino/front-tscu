@@ -140,8 +140,10 @@ const Home : React.FC = () : JSX.Element => {
             }
 
             <hr />
+            <section className = "container-bitacora">
 
-            <Bitacora photo = {photoUrl} />
+                <Bitacora photo = {photoUrl} />
+            </section>
             
             <SuccessBar successState = {isUpOk} handler = {handlerSucc}> Imagen subida con exito </SuccessBar>
 
