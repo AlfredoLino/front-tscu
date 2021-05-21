@@ -12,7 +12,9 @@ const Informe : React.FC<InformeInterface> = ({photo, date, content}) : JSX.Elem
             <div className="content-informe">
                 <header className="header-informe">
                     <div className="photo-name-bitacora">
-                        <img className="photo-informe" src={photo} alt="Foto de perfil" />
+                        <span>
+                            <img className="photo-informe" src={photo} alt="Foto de perfil" />
+                        </span>
                         <h2>
                             {localStorage.getItem("nombre")}
                         </h2>
