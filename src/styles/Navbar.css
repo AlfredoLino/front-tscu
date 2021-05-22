@@ -31,3 +31,12 @@ nav{
 .nav-subtitle{
     margin: 0;
 }
+
+@media (max-width:650px){
+    .nav-title{
+        font-size: 1.5rem;
+    }
+    .nav-subtitle{
+        font-size: 0.9rem;
+    }
+}
