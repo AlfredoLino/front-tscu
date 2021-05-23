@@ -11,8 +11,6 @@ import {ThemeProvider, createMuiTheme} from "@material-ui/core/styles"
 import './styles/App.css';
 import Home from './components/Home';
 import PrivateRoute from './components/Private/PrivateRoute';
-
-
 const theme = createMuiTheme({
   palette: {
       primary: {
@@ -41,9 +39,6 @@ function App() {
               <Route exact path = "/sign">
                 <Sign regVariant = "signin" ></Sign>
               </Route>
-
-              
-                
             <Switch>
             </Switch>
           </Router>

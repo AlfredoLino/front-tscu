@@ -11,6 +11,10 @@ import { reducerLog } from '../dispatchers/Log.reducer';
 import { useHistory } from 'react-router-dom';
 import {server} from "../ngrok_server";
 import { inputEvent, submitEvent } from '../types/InputTypes';
+import { useMainContext } from '../Hooks.custom/MainProvider';
+
+
+import socketio from "socket.io-client"
 
 
 
@@ -18,6 +22,8 @@ import { inputEvent, submitEvent } from '../types/InputTypes';
 const Login : React.FC<logProps> = (props) : JSX.Element => {
 
     const history = useHistory()
+
+    const {state : mainState, dispatch : mainDispatch} = useMainContext()
 
     const [open , setOpen] = React.useState<boolean>(false);
 
@@ -28,7 +34,7 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
         
     })
     React.useEffect(() => {
-        console.log(localStorage.getItem("id") == null);
+        console.log(mainState);
     }, [])
 
     
@@ -63,6 +69,7 @@ const Login : React.FC<logProps> = (props) : JSX.Element => {
                 localStorage.setItem("nombre", res.nombre)
                 localStorage.setItem("id", res.id)
                 localStorage.setItem("pf", res.pf)
+                mainDispatch({action : "setSocket", socket : socketio("http://localhost:8080")})
                 history.push("/")
 
             }else{

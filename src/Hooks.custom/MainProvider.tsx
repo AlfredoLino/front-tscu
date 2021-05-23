@@ -4,7 +4,9 @@ import {MainReducer, MainContextState, MainContextPayload} from "../dispatchers/
 
 interface MainContextReducer {
     state : MainContextState,
+
     dispatch : React.Dispatch<MainContextPayload>
+    
 }
 
 

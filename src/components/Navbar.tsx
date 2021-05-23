@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import "../styles/Navbar.css"
 import IconButton from '@material-ui/core/IconButton';
 import { server } from '../ngrok_server';
-
 interface navProps {
 
     variant ?: "log" | "normal" | "signin",

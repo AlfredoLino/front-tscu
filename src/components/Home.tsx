@@ -8,9 +8,9 @@ import { server } from '../ngrok_server';
 import SuccessBar from './Bars/Success.bar';
 import Bitacora from "./Bitacora"
 import "../styles/Home.css"
-
+import { useMainContext } from '../Hooks.custom/MainProvider';
 const Home : React.FC = () : JSX.Element => {
-    
+    const {state, dispatch} = useMainContext()
     const fileRef = React.useRef<HTMLImageElement>(null)
     const uploadRef = React.useRef<HTMLInputElement>(null)
     const [photoUrl, setPhotoUrl] = React.useState( localStorage.getItem("pf") === 'null' ? `${server.adress}/nopicture.png`:`${server.adress}/user/${localStorage.getItem("pf")}` );
@@ -103,7 +103,14 @@ const Home : React.FC = () : JSX.Element => {
     
     const [profilePic, setProfilePic] = React.useState<File>();
     useEffect( () => {
-        console.log(localStorage.getItem("pf") === 'null')
+        
+            state.socketcon!.emit("user-in", {
+                user: localStorage.getItem("email")
+            })
+            state.socketcon!.on("notify", (data) => {
+                console.log(data)
+            })
+        
         if(localStorage.getItem("token") == null)
             hist.push("/login")
     } )
@@ -128,6 +135,16 @@ const Home : React.FC = () : JSX.Element => {
                     </label>
                     <Button className = "upload_photo" onClick = {onUploadFile} disabled = {profilePic && !isUploading  ? false : true} startIcon = {<Publish />} variant = "contained" color = "secondary" >{isUploading ? "Subiendo foto..." : "Subir Foto"}</Button>
                     <Button className = "cancel_photo" variant = "contained" color = "primary" onClick = {quitPhoto} disabled = {profilePic && !isUploading  ? false : true} > Cancelar </Button>
+                    
+                    <Button className = "cancel_photo" variant = "contained" color = "primary" onClick = {
+                        () => {
+                            
+                            state.socketcon!.emit("friend-req", {
+                                toUser: "M@gmail.com"
+                            })
+                        }
+                    } > Enviar solicitud </Button>
+                    
             </div>
             
             {profilePic && 
